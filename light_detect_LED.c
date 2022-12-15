@@ -1,10 +1,10 @@
 #include "kilolib.h"
-//#define DEBUG
-//#include "debug.h"
+#define DEBUG
+#include "debug.h"
 
 // Constants for light following.
-#define THRESH_LO 250   
-#define THRESH_HI 650
+#define THRESH_LO 450
+#define THRESH_HI 600
 #define NUM_SAMPLES 10
 
 
@@ -81,34 +81,40 @@ void setup()
     delay(300);
     set_color(RGB(0,0,0));
     delay(300);
-    set_motion(LEFT);
+    
 }
 
 void loop()
 {
     int current_light = sample_light();
-    //printf("%d\n",current_light);
-    if (current_light < THRESH_LO)
+    #ifdef DEBUG
+    printf("%d\n",current_light);
+    #endif 
+    if (current_light == -1)
     {
-        set_motion(RIGHT);
-        set_color(RGB(0,0,1));
-
+        set_color(RGB(0,0,0));
     }
-    else if (current_light > THRESH_HI)
+    else if (current_light >= 0 && current_light < 340)
     {
-        set_motion(LEFT);
         set_color(RGB(1,0,0));
-
     }
-
-    delay(100);
+     else if (current_light >= 341 && current_light < 690)
+    {
+        set_color(RGB(0,1,0));
+    }
+     else if (current_light >= 691)
+    {
+        set_color(RGB(0,0,1));
+    }
    
 }
 
 int main()
 {
     kilo_init();
-    //debug_init();
+    #ifdef DEBUG
+    debug_init();
+    #endif
     kilo_start(setup, loop);
 
     return 0;

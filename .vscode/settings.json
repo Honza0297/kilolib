@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "kilolib.h": "c",
+        "ohc.h": "c",
+        "message.h": "c",
+        "message_send.h": "c"
+    }
+}

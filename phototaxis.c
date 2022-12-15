@@ -3,8 +3,8 @@
 //#include "debug.h"
 
 // Constants for light following.
-#define THRESH_LO 250   
-#define THRESH_HI 650
+#define THRESH_LO 450
+#define THRESH_HI 600
 #define NUM_SAMPLES 10
 
 
